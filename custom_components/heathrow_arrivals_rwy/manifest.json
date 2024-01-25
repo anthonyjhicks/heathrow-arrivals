@@ -5,7 +5,7 @@
     "config_flow": false,    
     "dependencies": [],
     "documentation": "https://github.com/anthonyjhicks/heathrow-arrivals-rwy",
-    "iot_class": "local_polling",
+    "iot_class": "cloud_polling",    
     "issues": "https://github.com/anthonyjhicks/heathrow-arrivals-rwy/issues",    
     "requirements": ["beautifulsoup4==4.9.3"],
     "version": "1.0"
