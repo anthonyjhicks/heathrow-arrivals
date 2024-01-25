@@ -19,17 +19,17 @@ You could also add this superb [Home Assistant Flightradar24](https://github.com
 Have [HACS](https://hacs.xyz/) installed, this will allow you to update easily.
 
 1. Go to the <b>HACS</b>-><b>Integrations</b>.
-2. Add this repository (https://github.com/anthonyjhicks/heathrow-arrival-rwy) as a [custom repository](https://hacs.xyz/docs/faq/custom_repositories/)
+2. Add this repository (https://github.com/anthonyjhicks/heathrow-arrivals) as a [custom repository](https://hacs.xyz/docs/faq/custom_repositories/)
 3. Click on `+ Explore & Download Repositories`.
-4. Search for `Heathrow Arrival Runway`. 
-5. Navigate to `Heathrow Arrival Runway` integration 
+4. Search for `Heathrow Arrivals`. 
+5. Navigate to `Heathrow Arrivals` integration 
 6. Press `DOWNLOAD` and in the next window also press `DOWNLOAD`. 
 7. After download, restart Home Assistant.
 
 ### Manual
 
 1. Locate the `custom_components` directory in your Home Assistant configuration directory. It may need to be created.
-2. Copy the `custom_components/heathrow_arrival_rwy` directory into the `custom_components` directory.
+2. Copy the `custom_components/heathrow_arrivals` directory into the `custom_components` directory.
 3. Restart Home Assistant.
 
 ## Configuration
@@ -55,15 +55,15 @@ Please report any [Issues](http://github.com/anthonyjhicks/heathrow-arrival-rwy/
 
 ***
 
-[heathrow-landings]: https://github.com/anthonyjhicks/heathrow-arrival-rwy
+[heathrow-landings]: https://github.com/anthonyjhicks/heathrow-arrivals
 [buymecoffee]: https://www.buymeacoffee.com/anthonyjhicks
 [buymecoffeebadge]: https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg?style=for-the-badge
-[commits-shield]: https://img.shields.io/github/commit-activity/y/anthonyjhicks/heathrow-arrival-rwy.svg?style=for-the-badge
-[commits]: https://github.com/anthonyjhicks/heathrow-arrival-rwy/commits/main
+[commits-shield]: https://img.shields.io/github/commit-activity/y/anthonyjhicks/heathrow-arrivals.svg?style=for-the-badge
+[commits]: https://github.com/anthonyjhicks/heathrow-arrivals/commits/main
 [exampleimg]: example.png
 [forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg?style=for-the-badge
 [forum]: https://community.home-assistant.io/
-[license-shield]: https://img.shields.io/github/license/anthonyjhicks/heathrow-arrival-rwy.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/anthonyjhicks/heathrow-arrivals.svg?style=for-the-badge
 [maintenance-shield]: https://img.shields.io/badge/maintainer-Anthony%20Hicks%20%40anthonyjhicks-blue.svg?style=for-the-badge
-[releases-shield]: https://img.shields.io/github/release/anthonyjhicks/heathrow-arrival-rwy.svg?style=for-the-badge
-[releases]: https://github.com/anthonyjhicks/heathrow-arrival-rwy/releases
+[releases-shield]: https://img.shields.io/github/release/anthonyjhicks/heathrow-arrivals.svg?style=for-the-badge
+[releases]: https://github.com/anthonyjhicks/heathrow-arrivals/releases
