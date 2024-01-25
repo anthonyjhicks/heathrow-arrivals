@@ -2,11 +2,11 @@
     "domain": "heathrow_arrival_rwy",
     "name": "Heathrow Arrival Runway",
     "codeowners": ["@anthonyjhicks"],
-    "config_flow": false,    
+    "config_flow": false,
     "dependencies": [],
-    "documentation": "https://github.com/anthonyjhicks/heathrow-arrivals-rwy",
+    "documentation": "https://github.com/anthonyjhicks/heathrow-arrival-rwy",
     "iot_class": "local_polling",
-    "issues": "https://github.com/anthonyjhicks/heathrow-arrivals-rwy/issues",    
+    "issues": "https://github.com/anthonyjhicks/heathrow-arrival-rwy/issues",
     "requirements": ["beautifulsoup4==4.9.3"],
     "version": "1.0"
 }
