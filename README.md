@@ -43,7 +43,7 @@ sensor:
 
 ## Usage
 
-This will create three sensors you can use in your Dashboards, Automations etc.
+This will create a sensor you can use in your Dashboards, Automations etc.
 
 | Entity | Name | State | Attributes |
 | -- | -- | -- | -- |
