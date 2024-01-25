@@ -1,5 +1,5 @@
 {
-    "domain": "heathrow_arrival_rwy",
+    "domain": "heathrow_arrivals",
     "name": "Heathrow Arrival Runway",
     "codeowners": ["@anthonyjhicks"],
     "config_flow": false,
