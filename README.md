@@ -42,10 +42,8 @@ This will create three sensors you can use in your Dashboards, Automations etc.
 
 | Entity | Name | State | Attributes |
 | -- | -- | -- | -- |
-| sensor.heathrow_landings_0600_1500 | Heathrow Landings 0600-1500 | 27L | friendly_name: Heathrow Landings 0600-1500 |
-| sensor.heathrow_landings_1500 | Heathrow Landings 1500 | 27R * |	friendly_name: Heathrow Landings 1500 | 
-| sensor.heathrow_night | Heathrow Night | 27L * | friendly_name: Heathrow Night |
+| sensor.heathrow_arrival_rwy | Heathrow Arrival Rwy | 27L | friendly_name: Heathrow Arrival Rwy |
 
 ## Issues
 
-Please report any [Issues](http://github.com/anthonyjhicks/heathrow-landings/issues)
+Please report any [Issues](http://github.com/anthonyjhicks/heathrow-arrival-rwy/issues)
