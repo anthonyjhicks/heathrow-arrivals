@@ -3,7 +3,7 @@
     "name": "Heathrow Arrivals Runway",
     "codeowners": [],
     "dependencies": [],
-    "documentation": "https://github.com/anthonyjhicks/heathrow-arrivals",
+    "documentation": "https://github.com/anthonyjhicks/heathrow-arrivals-rwy",
     "iot_class": "local_polling",
     "requirements": ["beautifulsoup4==4.9.3"],
     "version": "0.1.0"
