@@ -23,7 +23,7 @@ def setup_platform(
     add_entities: AddEntitiesCallback,
     discovery_info: DiscoveryInfoType | None = None,
 ) -> None:
-    add_entities([EGLLArrivalRwySensor()], update_before_add=True)
+    add_entities([HeathrowArrivalRwySensor()], update_before_add=True)
 
 
 async def fetch_arrival_rwy(session, url):
@@ -41,8 +41,8 @@ async def fetch_arrival_rwy(session, url):
         return arrival_rwy_value
 
 
-class EGLLArrivalRwySensor(SensorEntity):
-    _attr_name = "Heathrow Active Arrival Rwy"
+class HeathrowArrivalRwySensor(SensorEntity):
+    _attr_name = "Heathrow Arrival Rwy"
 
     async def async_update(self):
         url = "https://atis.report/a/EGLL"
