@@ -1,5 +1,10 @@
 # Heathrow Arrival Runway
-[![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg)](https://github.com/hacs/integration)
+[![GitHub Release][releases-shield]][releases]
+[![GitHub Activity][commits-shield]][commits]
+[![License][license-shield]](LICENSE)
+
+![Project Maintenance][maintenance-shield]
+[![BuyMeCoffee][buymecoffeebadge]][buymecoffee]
 
 Home Assistant sensor indicating the current active Arrival runway at London Heathrow Airport according to the EGLL ATIS. Ideal for use if you live in the Heathrow flight path and want to be to able to track if aircraft are likely to be flying over your location for display on your Dashboard or perhaps linked to an automation.
 
@@ -47,3 +52,18 @@ This will create three sensors you can use in your Dashboards, Automations etc.
 ## Issues
 
 Please report any [Issues](http://github.com/anthonyjhicks/heathrow-arrival-rwy/issues)
+
+***
+
+[heathrow-landings]: https://github.com/anthonyjhicks/heathrow-arrival-rwy
+[buymecoffee]: https://www.buymeacoffee.com/anthonyjhicks
+[buymecoffeebadge]: https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg?style=for-the-badge
+[commits-shield]: https://img.shields.io/github/commit-activity/y/anthonyjhicks/heathrow-arrival-rwy.svg?style=for-the-badge
+[commits]: https://github.com/anthonyjhicks/heathrow-arrival-rwy/commits/main
+[exampleimg]: example.png
+[forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg?style=for-the-badge
+[forum]: https://community.home-assistant.io/
+[license-shield]: https://img.shields.io/github/license/anthonyjhicks/heathrow-arrival-rwy.svg?style=for-the-badge
+[maintenance-shield]: https://img.shields.io/badge/maintainer-Anthony%20Hicks%20%40anthonyjhicks-blue.svg?style=for-the-badge
+[releases-shield]: https://img.shields.io/github/release/anthonyjhicks/heathrow-arrival-rwy.svg?style=for-the-badge
+[releases]: https://github.com/anthonyjhicks/heathrow-arrival-rwy/releases
