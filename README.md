@@ -1,11 +1,11 @@
-# Heathrow Arrival Rwy
+# Heathrow Arrival Runway
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg)](https://github.com/hacs/integration)
 
 Home Assistant sensor indicating the current active Arrival runway at London Heathrow Airport according to the EGLL ATIS. Ideal for use if you live in the Heathrow flight path and want to be to able to track if aircraft are likely to be flying over your location for display on your Dashboard or perhaps linked to an automation.
 
-I recommend combining this with my [Heathrow Landings](http://github.com/anthonyjhicks/heathrow-landings) integration to also obtain the scheduled runway usage for the day for a full view of arrivals flight paths for the morning, afternoon and night.
+I recommend combining this with my [Heathrow Landings](http://github.com/anthonyjhicks/heathrow-landings) integration to also obtain three addition sensors showing scheduled runway usage for the day.  Giving you a full view of arrival flight paths for the morning, afternoon and night.
 
-You could also add this superb [Home Assistant Flightradar24](https://github.com/AlexandrErohin/home-assistant-flightradar24) intergation to count the number of aircraft flying over your location (combine it with the Utility Meter Helper to get the counts you need).
+You could also add this superb [Home Assistant Flightradar24](https://github.com/AlexandrErohin/home-assistant-flightradar24) integration to count the number of aircraft flying over your location (combine it with the Utility Meter Helper to get the incremental counts you need).
 
 ## Installation
 
