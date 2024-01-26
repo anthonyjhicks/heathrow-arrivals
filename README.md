@@ -38,7 +38,7 @@ There is no configuration UI.  You must add the following to the sensor section 
 
 ```markdown
 sensor:
-  - platform: heathrow_arrival_rwy
+  - platform: heathrow_arrivals
 ```
 
 ## Usage
