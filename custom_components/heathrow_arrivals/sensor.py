@@ -14,7 +14,8 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
 
-cache = TTLCache(maxsize=10, ttl=600)  # Cache for 10 minutes
+# Cache for 10 minutes so as not hammer the atis report website - I do wish I could find a good free API for this instead
+cache = TTLCache(maxsize=10, ttl=600)
 
 
 def setup_platform(
