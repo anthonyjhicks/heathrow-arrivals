@@ -6,7 +6,7 @@
     "dependencies": [],
     "documentation": "https://github.com/anthonyjhicks/heathrow-arrivals",
     "iot_class": "local_polling",
-    "issues_tracker": "https://github.com/anthonyjhicks/heathrow-arrivals/issues",
+    "issue_tracker": "https://github.com/anthonyjhicks/heathrow-arrivals/issues",
     "requirements": ["beautifulsoup4==4.9.3"],
     "version": "1.0"
 }
