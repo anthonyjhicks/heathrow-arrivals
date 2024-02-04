@@ -37,10 +37,16 @@ async def fetch_arrival_rwy(session, url):
         soup = BeautifulSoup(text, "html.parser")
         atis_text = soup.find(class_="atis-text").get_text()
         arrival_rwy_index = atis_text.find("ARRIVAL RWY")
-        arrival_rwy_value = atis_text[arrival_rwy_index:].split()[2]
-        cache[url] = arrival_rwy_value
-        return arrival_rwy_value
 
+        # Check if "ARRIVAL RWY" is found in the ATIS text
+        if arrival_rwy_index != -1:
+            arrival_rwy_value = atis_text[arrival_rwy_index:].split()[2]
+            cache[url] = arrival_rwy_value
+            return arrival_rwy_value
+        else:
+            # Return "Unknown" if "ARRIVAL RWY" is not found
+            cache[url] = "Unknown"
+            return "Unknown"
 
 class HeathrowArrivalRwySensor(SensorEntity):
     _attr_name = "Heathrow Arrival Rwy"
