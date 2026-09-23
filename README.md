@@ -133,6 +133,10 @@ Heathrow notes that it cannot always adhere to the programme - delays can put ar
 
 When no recent ATIS is available the computed answer is an inference, not an observation. It is usually right, but it cannot see tactical changes - most notably arrivals being taken on the departure runway when arrivals are running late.
 
+### Brand icon
+
+Since Home Assistant 2026.3 a custom integration ships its own brand images, so the icon lives at `custom_components/heathrow_arrivals/brand/icon.png` (plus an `@2x` version) rather than in the [home-assistant/brands](https://github.com/home-assistant/brands) repository. Regenerate it with `python3 scripts/build_brand_icon.py`.
+
 ### Updating the alternation programme
 
 The schedule ships as `custom_components/heathrow_arrivals/runway_alternation_2026.json`. Heathrow publishes a new programme each year; to add one, drop a `runway_alternation_<year>.json` file alongside it in the same format and restart Home Assistant. Outside any year it has data for, the sensor falls back to reporting both runways for the current direction and sets `alternation_scheduled` to `false`.
