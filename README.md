@@ -119,6 +119,37 @@ The three `Planned Rwy` sensors need no network and stay available even when bot
 
 `marginal` is always `false` when the ATIS supplied the runway, because that is an observation rather than an inference. `wind_marginal` reports the wind on its own regardless of source, so it still flags a possible switch while the ATIS is being used.
 
+When `marginal` is `true`, the useful response is usually to wait rather than act: the next METAR is at most half an hour away and will normally settle it.
+
+A worked example - tell me when the runway actually changes, but not on a wind that may flip straight back:
+
+```yaml
+automation:
+  - alias: Heathrow arrival runway changed
+    triggers:
+      - trigger: state
+        entity_id: sensor.heathrow_arrival_rwy
+    conditions:
+      # A restart or a failed fetch is not a runway change.
+      - condition: template
+        value_template: >
+          {{ trigger.from_state.state not in ['unknown', 'unavailable']
+             and trigger.to_state.state not in ['unknown', 'unavailable']
+             and trigger.from_state.state != trigger.to_state.state }}
+      # Hold off while the wind is sitting on the switch threshold.
+      - condition: template
+        value_template: "{{ not state_attr('sensor.heathrow_arrival_rwy', 'marginal') }}"
+    actions:
+      - action: notify.mobile_app_your_phone
+        data:
+          message: >
+            Heathrow now landing {{ trigger.to_state.state }}
+            ({{ state_attr('sensor.heathrow_arrival_rwy', 'mode') }},
+            from {{ state_attr('sensor.heathrow_arrival_rwy', 'source') }})
+```
+
+Drop the second condition if you would rather hear about every change and judge for yourself - `marginal` is still on the notification via `source` and the wind attributes.
+
 ## How the runway is chosen
 
 **From the ATIS.** If atis.guru has an EGLL arrival ATIS less than 90 minutes old naming a landing runway, that is used directly and nothing below applies. A stale ATIS is ignored rather than trusted - it is still reported in `atis_runways` so you can see it.
