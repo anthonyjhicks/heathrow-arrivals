@@ -533,7 +533,7 @@ class HeathrowPlannedArrivalRwySensor(CoordinatorEntity, SensorEntity):
     """What the programme says should be landing now, given the wind."""
 
     _attr_name = "Heathrow Planned Arrival Rwy"
-    _attr_icon = "mdi:calendar-clock"
+    _attr_icon = "mdi:airplane-clock"
     _attr_unique_id = "heathrow_arrivals_planned_arrival_rwy"
     _attr_attribution = (
         "Runway alternation programme from heathrow.com; "
@@ -575,7 +575,7 @@ class _PlannedWeekSensor(SensorEntity):
     down; only the calendar decides them.
     """
 
-    _attr_icon = "mdi:calendar-clock"
+    _attr_icon = "mdi:airplane-clock"
     _attr_attribution = "Runway alternation programme from heathrow.com"
 
     def __init__(self, schedule: dict) -> None:
