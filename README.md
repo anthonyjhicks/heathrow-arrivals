@@ -85,6 +85,9 @@ The three `Planned Rwy` sensors need no network and stay available even when bot
 | `runways` | `["27R"]` | The state as a list |
 | `planned_runways` | `["27R"]` | What the programme expected |
 | `matches_plan` | `true` | Whether actual and planned agree |
+| `marginal` | `false` | The state is a toss-up - see below |
+| `wind_marginal` | `false` | The wind alone is a toss-up, whatever the source |
+| `westerly_tailwind_kt` | `-1` | Tailwind landing westerly; negative is a headwind |
 | `mode` | `Westerly` | `Westerly` or `Easterly` |
 | `period` | `morning` | `early morning`, `morning`, `afternoon` or `night` |
 | `atis_letter` | `B` | The ATIS information letter |
@@ -103,13 +106,24 @@ The three `Planned Rwy` sensors need no network and stay available even when bot
 | `observation_time` | `2026-09-23T06:20:00Z` | When the METAR was issued |
 | `metar` | `METAR EGLL 230620Z ...` | The raw observation |
 
-The `Planned` sensors carry `alternation_week` plus the runways for their period (`day_morning_runway`, `day_afternoon_runway`, `night_primary_runway`, `night_alternative_runway`).
+`Heathrow Planned Arrival Rwy` carries `mode`, `period`, `marginal`, `westerly_tailwind_kt` and the alternation fields. The three week sensors carry `alternation_week` plus the runways for their period (`day_morning_runway`, `day_afternoon_runway`, `night_primary_runway`, `night_alternative_runway`).
+
+### Marginal winds
+
+`marginal` is `true` when the state should be treated as soft: the direction was computed from a wind sitting within 2 knots of the 5-knot switch threshold, where Heathrow's own decision also weighs forecast trend and runway wetness. Use it to hold off on acting:
+
+```yaml
+{{ is_state('sensor.heathrow_arrival_rwy', '27R')
+   and not state_attr('sensor.heathrow_arrival_rwy', 'marginal') }}
+```
+
+`marginal` is always `false` when the ATIS supplied the runway, because that is an observation rather than an inference. `wind_marginal` reports the wind on its own regardless of source, so it still flags a possible switch while the ATIS is being used.
 
 ## How the runway is chosen
 
 **From the ATIS.** If atis.guru has an EGLL arrival ATIS less than 90 minutes old naming a landing runway, that is used directly and nothing below applies. A stale ATIS is ignored rather than trusted - it is still reported in `atis_runways` so you can see it.
 
-**Direction.** Heathrow runs westerly whenever it reasonably can, and only turns round once the tailwind component on runway 27 exceeds about 5 knots. Calm and variable winds stay westerly. Westerly operations account for roughly 70% of the year.
+**Direction.** Heathrow runs westerly whenever it reasonably can, and only turns round once the tailwind component on runway 27 exceeds about 5 knots. Calm and variable winds stay westerly. Westerly operations account for roughly 70% of the year. Close to that threshold the call is genuinely uncertain, which is what `marginal` flags.
 
 **Which runway.** On westerlies the alternation programme applies: one runway lands from 06:00 to 15:00, the other from 15:00 until the last departure, swapping week by week. Both runways take arrivals between 06:00 and 07:00, the busiest arrivals hour. At night a four-weekly cycle picks a single strip, and the wind decides which end of it is used. Flights before 06:00 on a Monday still follow the previous week's night pattern.
 
