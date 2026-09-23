@@ -74,6 +74,12 @@ EASTERLY_HEADING = 90
 # exceeds roughly five knots.
 TAILWIND_TOLERANCE_KT = 5
 
+# How close to that threshold the wind has to sit before the direction is a
+# coin toss. Heathrow weighs forecast trend and runway wetness too, so within
+# a couple of knots either way the computed direction should be treated as
+# soft rather than as an answer.
+MARGINAL_BAND_KT = 2
+
 # The alternation programme is published in London local time, whatever the
 # Home Assistant instance is set to.
 LONDON = ZoneInfo("Europe/London")
@@ -138,6 +144,23 @@ def operating_mode(wdir: int | None, wspd) -> str:
     if headwind_on_27 is not None and -headwind_on_27 > TAILWIND_TOLERANCE_KT:
         return "Easterly"
     return "Westerly"
+
+
+def westerly_tailwind(wdir: int | None, wspd) -> int | None:
+    """Tailwind (kt) landing westerly - the component the direction turns on.
+
+    Negative is a headwind on 27. None when the wind direction is unknown.
+    """
+    headwind, _, _ = wind_components(wdir, wspd, WESTERLY_HEADING)
+    return None if headwind is None else -headwind
+
+
+def is_marginal(wdir: int | None, wspd) -> bool:
+    """Whether the wind sits close enough to the switch threshold to be a toss-up."""
+    tailwind = westerly_tailwind(wdir, wspd)
+    if tailwind is None:
+        return False
+    return abs(tailwind - TAILWIND_TOLERANCE_KT) <= MARGINAL_BAND_KT
 
 
 def parse_wind_variation(raw: str | None) -> tuple[int | None, int | None]:
@@ -370,10 +393,17 @@ def build_state(schedule: dict, metar: dict | None, atis: dict | None, now: date
         age = now.astimezone(UTC) - atis["issued"]
     fresh = bool(atis and atis.get("runways") and age is not None and age <= MAX_ATIS_AGE)
 
+    # The wind can be a toss-up even when the ATIS has already settled it; the
+    # state is only soft when it was computed from that wind in the first place.
+    wind_marginal = is_marginal(wdir, wspd) if metar else False
+
     return {
         "now": now,
         "metar_available": metar is not None,
         "actual": atis["runways"] if fresh else plan["runways"],
+        "wind_marginal": wind_marginal,
+        "marginal": wind_marginal and not fresh,
+        "westerly_tailwind_kt": westerly_tailwind(wdir, wspd) if metar else None,
         "source": SOURCE_ATIS if fresh else SOURCE_COMPUTED,
         "atis_letter": atis.get("letter") if atis else None,
         "atis_issued": atis["issued"].isoformat().replace("+00:00", "Z")
@@ -481,6 +511,9 @@ class HeathrowArrivalRwySensor(CoordinatorEntity, SensorEntity):
             "runways": data["actual"],
             "planned_runways": plan["runways"],
             "matches_plan": data["actual"] == plan["runways"],
+            "marginal": data["marginal"],
+            "wind_marginal": data["wind_marginal"],
+            "westerly_tailwind_kt": data["westerly_tailwind_kt"],
             "mode": data["mode"],
             "period": plan["period"],
             "atis_letter": data["atis_letter"],
@@ -523,6 +556,8 @@ class HeathrowPlannedArrivalRwySensor(CoordinatorEntity, SensorEntity):
             "station": STATION,
             "runways": plan["runways"],
             "mode": data["mode"],
+            "marginal": data["wind_marginal"],
+            "westerly_tailwind_kt": data["westerly_tailwind_kt"],
             "period": plan["period"],
             "alternation_week": plan["week_commencing"],
             "alternation_scheduled": plan["scheduled"],
